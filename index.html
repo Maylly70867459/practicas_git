@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espiral</title>
+    <style>
+      #canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+  
+    <script>
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+  
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+  
+      var angle = 0;
+      var radius = 10;
+      var rotations = 5;
+      var distance = 5;
+  
+      function drawSpiral() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+  
+        for (var i = 0; i < rotations * 360; i++) {
+          var currentAngle = (angle + i) * Math.PI / 180;
+          var currentRadius = radius + distance * currentAngle;
+  
+          var x = centerX + currentRadius * Math.cos(currentAngle);
+          var y = centerY + currentRadius * Math.sin(currentAngle);
+  
+          context.beginPath();
+          context.arc(x, y, 2, 0, 2 * Math.PI);
+          context.fill();
+          context.closePath();
+        }
+  
+        angle += 1;
+        requestAnimationFrame(drawSpiral);
+      }
+  
+      drawSpiral();
+    </script>
+  </body>
+  </html>
